@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+		<key>Label</key>
+		<string>com.zabbix.zabbix_agentd</string>
+    <key>RunAtLoad</key>
+    <true/>
+		<key>UserName</key>
+		<string>zabbix</string>
+		<key>GroupName</key>
+		<string>zabbix</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>/opt/boxen/homebrew/sbin/zabbix_agentd</string>
+			<string>-c</string>
+			<string>/usr/local/etc/zabbix_agentd.conf</string>
+		</array>
+  </dict>
+</plist>
