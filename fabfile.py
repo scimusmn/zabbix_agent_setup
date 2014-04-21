@@ -172,9 +172,14 @@ In Zabbix parlance this is called the 'hostname'
 default = """
     zabbix_hostname = prompt(hostname_prompt, default=computer_hostname())
     with _mute():
-        local(sed_bin() + ' ' + '"s/^Hostname=Windows\ host$/' +
-              'Hostname=' + zabbix_hostname + '/g" ' + conf_file + '.01'
-              ' >' + conf_file + '.02')
+        if platform.system() == 'Windows':
+            local(sed_bin() + ' ' + '"s/^Hostname=Windows\ host$/' +
+                  'Hostname=' + zabbix_hostname + '/g" ' + conf_file + '.01'
+                  ' >' + conf_file + '.02')
+        if platform.system() == 'Darwin':
+            local(sed_bin() + ' ' + '"s/^Hostname=Zabbix\ server$/' +
+                  'Hostname=' + zabbix_hostname + '/g" ' + conf_file + '.01'
+                  ' >' + conf_file + '.02')
 
     # Get rid of the temporary sed files
     with _mute():
