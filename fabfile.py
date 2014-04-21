@@ -188,7 +188,7 @@ default = """
     # Copy the Launch Agent in place
     # This will cause the Zabbix Agent to start on boot
     if platform.system() == 'Darwin':
-        local('cp com.zabbix.zabbix_agentd.plist \
+        local('sudo cp com.zabbix.zabbix_agentd.plist \
               /Library/LaunchDaemons/com.zabbix.zabbix_agentd.plist')
 
 
