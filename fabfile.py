@@ -185,6 +185,12 @@ default = """
             local('del /Q ' + conf_file + '.01')
             local('move /Y ' + conf_file + '.02 ' + conf_file)
 
+    # Copy the Launch Agent in place
+    # This will cause the Zabbix Agent to start on boot
+    if platform.system() == 'Darwin':
+        local('cp com.zabbix.zabbix_agentd.plist \
+              /Library/LaunchDaemons/com.zabbix.zabbix_agentd.plist')
+
 
 @task
 def start():
