@@ -193,6 +193,11 @@ default = """
     # Copy the Launch Agent in place
     # This will cause the Zabbix Agent to start on boot
     if platform.system() == 'Darwin':
+        sudo_prompt = """
+The system may need your password to run sudo commands.
+default = """
+        print
+        print sudo_prompt
         local('sudo cp com.zabbix.zabbix_agentd.plist \
               /Library/LaunchDaemons/com.zabbix.zabbix_agentd.plist')
 
