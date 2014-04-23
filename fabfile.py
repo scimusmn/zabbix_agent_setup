@@ -199,7 +199,7 @@ default = """
         print
         print sudo_prompt
         local('sudo cp com.zabbix.zabbix_agentd.plist \
-              /Library/LaunchDaemons/com.zabbix.zabbix_agentd.plist')
+              ~/Library/LaunchAgents/com.zabbix.zabbix_agentd.plist')
 
 
 @task
