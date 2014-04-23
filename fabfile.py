@@ -115,8 +115,8 @@ def init_conf():
         if not os.path.exists(MACOS_ETC):
             local('mkdir ' + MACOS_ETC)
         conf_file = MACOS_ETC + os.sep + 'zabbix_agentd.conf'
-        local('cp ' + MACOS_ZABBIX_DIR + os.sep + 'etc' + os.sep +
-              'zabbix_agentd.conf ' + conf_file)
+        local('cp ' + os.path.dirname(os.path.abspath(__file__)) + os.sep +
+              'zabbix_agentd_osx.conf ' + conf_file)
     if platform.system() == 'Windows':
         conf_file = WIN_ZABBIX_CONF + 'zabbix_agentd.conf'
         with _mute():
