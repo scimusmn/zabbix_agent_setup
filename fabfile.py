@@ -172,7 +172,21 @@ def configure():
     print
     print _header("Configuring Zabbix")
 
-    conf_file = init_conf()
+    if check_conf():
+        continue_prompt = """
+A configuration file already exists. Do you want to proceed?
+This will destroy your existing settings.
+y/n
+default = """
+        proceed = prompt(continue_prompt, default='n')
+        if proceed == 'n':
+            exit()
+        if proceed == 'y':
+            conf_file = init_conf()
+        else:
+            exit()
+    else:
+        conf_file = init_conf()
 
     # Ask for the name of the Zabbix server
     server_prompt = """
