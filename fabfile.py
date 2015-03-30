@@ -19,6 +19,7 @@ WIN_ZABBIX_LOG = WIN_LOCAL_LOG + 'zabbix\\'
 MACOS_ZABBIX_DIR = '/opt/boxen/homebrew/Cellar/zabbix/2.2.2/'
 MACOS_ETC = '/usr/local/etc'
 
+
 @contextmanager
 def _mute():
     """Run a fabric command without reporting any responses to the user. """
@@ -53,8 +54,27 @@ def sed_check():
 
 
 @task
-def install_windows():
+def install():
+    """Download and install Zabbix agent """
+    if platform.system() == 'Darwin':
+        install_mac()
+    else:
+        install_windows()
+
+
+def install_mac():
     """Download and install Zabbix agent
+
+    Downloads the Zabbix installer from the software depot.
+    Moves binaries and config files into place.
+    """
+    print
+    print _header("Installing the Zabbix agent")
+    local('brew install zabbix --agent-only')
+
+
+def install_windows():
+    """WIN only - Download and install Zabbix agent
 
     Downloads the Zabbix installer from the software depot.
     Moves binaries and config files into place.
@@ -204,7 +224,7 @@ default = """
 
 @task
 def start():
-    """Start the Zabbix agent
+    """WIN only - Start the Zabbix agent
 
     TODO - MACOS version
     """
@@ -219,7 +239,7 @@ def start():
 
 @task
 def uninstall():
-    """Uninstall Zabbix
+    """WIN only - Uninstall Zabbix
 
     This will remove the Zabbix files, stop the Zabbix service, and
     delete the Zabbix service.
@@ -275,7 +295,7 @@ since it may contain historical information that we don't want to loose.
 
 @task
 def service_installed():
-    """Determine whether the Zabbix service is installed and running
+    """WIN only - Determine whether the Zabbix service is installed and running
 
     Returns:
         A dictionary of a service state and explanatory message
