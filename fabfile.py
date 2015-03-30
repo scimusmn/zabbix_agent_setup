@@ -240,6 +240,8 @@ default = """
         print sudo_prompt
         local('sudo cp com.zabbix.zabbix_agentd.plist \
               ~/Library/LaunchAgents/com.zabbix.zabbix_agentd.plist')
+        local('launchctl load \
+              ~/Library/LaunchAgents/com.zabbix.zabbix_agentd.plist')
 
 
 @task
