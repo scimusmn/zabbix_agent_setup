@@ -55,7 +55,9 @@ def sed_check():
 
 @task
 def install():
-    """Download and install Zabbix agent """
+    """Download and install Zabbix agent
+
+    """
     if platform.system() == 'Darwin':
         install_mac()
     else:
@@ -67,6 +69,8 @@ def install_mac():
 
     Downloads the Zabbix installer from the software depot.
     Moves binaries and config files into place.
+
+    TODO: Check is Homebrew is present
     """
     print
     print _header("Installing the Zabbix agent")
@@ -74,7 +78,7 @@ def install_mac():
 
 
 def install_windows():
-    """WIN only - Download and install Zabbix agent
+    """Download and install Zabbix agent on Windows
 
     Downloads the Zabbix installer from the software depot.
     Moves binaries and config files into place.
