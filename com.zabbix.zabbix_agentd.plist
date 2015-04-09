@@ -6,6 +6,11 @@
     <string>com.zabbix.zabbix_agentd</string>
     <key>RunAtLoad</key>
     <true/>
+    <key>KeepAlive</key>
+    <dict>
+      <key>SuccessfulExit</key>
+      <false/>
+    </dict>
     <key>ProgramArguments</key>
     <array>
       <string>/opt/boxen/homebrew/sbin/zabbix_agentd</string>
