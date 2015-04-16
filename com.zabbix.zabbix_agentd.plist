@@ -14,5 +14,9 @@
       <string>-c</string>
       <string>/usr/local/etc/zabbix_agentd.conf</string>
     </array>
+    <key>StandardErrorPath</key>
+    <string>/tmp/zabbix-err.log</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/zabbix-out.log</string>
   </dict>
 </plist>
