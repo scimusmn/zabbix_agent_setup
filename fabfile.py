@@ -73,7 +73,7 @@ def install_mac():
     """
     print
     print _header("Installing the Zabbix agent")
-    local('brew install zabbix --agent-only')
+    local('brew install zabbix --without-server-proxy')
 
 
 def install_windows():
