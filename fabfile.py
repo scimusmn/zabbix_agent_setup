@@ -37,6 +37,7 @@ def _header(txt):
 
 
 def sed_bin():
+    sed = '/bin/sed'
     if platform.system() == 'Darwin':
         sed = '/usr/bin/sed'
     if platform.system() == 'Windows':
@@ -110,7 +111,7 @@ def install_windows():
     zabbix_archive_name = 'zabbix_agents_2.0.4.win.zip'
     zabbix_archive_remote = REMOTE_DEPOT + zabbix_archive_name
     with _mute():
-        get(zabbix_archive_remote, local_temp())
+        get(zabbix_archive_remote, get_local_temp())
     print 'Zabbix downloaded successfully'
     # Disconnect now that we're done downloading things from the depot
     disconnect_all()
@@ -146,6 +147,13 @@ def check_conf():
 
 
 def init_conf():
+    conf_file = ''
+    system = platform.system()
+    if system != 'Darwin' or 'Windows':
+        print
+        print _header("Only Mac OS X and Windows are supported. Aborting.")
+        exit()
+
     print
     print _header("Initializing agent config files")
 
@@ -184,6 +192,7 @@ def configure():
     print
     print _header("Configuring Zabbix")
 
+    conf_file = ''
     if check_conf():
         continue_prompt = """
 A configuration file already exists. Do you want to proceed?
@@ -333,8 +342,11 @@ def service_installed():
 
     Returns:
         A dictionary of a service state and explanatory message
+
+    TODO: Fix the broad exception clause. Handle a more specific exception
     """
     with _mute():
+        state = {}
         try:
             zabbix_srvc_info = local('sc query "Zabbix Agent"', capture=True)
             regex = re.compile("STATE[^:]*: *([\d]*)", re.MULTILINE)
@@ -376,7 +388,7 @@ def install_exe(exe):
     get(REMOTE_DEPOT + exe, WIN_LOCAL_BIN)
 
 
-def local_temp():
+def get_local_temp():
     """Get the Windows temp folder
 
     Returns: The temp folder path as a string.
