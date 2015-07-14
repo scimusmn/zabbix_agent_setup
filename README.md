@@ -10,4 +10,4 @@ Run `fab -l` to see available commands. Run commands with `fab command_name`
 
 # Requirements
 * Python
-* Fabric
+* [Fabric](http://www.fabfile.org/installing.html)
