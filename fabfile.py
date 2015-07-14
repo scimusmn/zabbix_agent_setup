@@ -68,12 +68,24 @@ def install_mac():
     """Use homebrew to install the Zabbix Agent on a Mac
 
     Homebrew downloads the agent from SourceForge
-
-    TODO: Check if Homebrew is present
     """
     print
-    print _header("Installing the Zabbix agent")
-    local('brew install zabbix --without-server-proxy')
+    if check_for_homebrew():
+        print _header("Installing the Zabbix agent")
+        # local('brew install zabbix --without-server-proxy')
+    else:
+        print _header('Homebrew is not installed. It is required. See README. Aborting.')
+        exit()
+
+
+def check_for_homebrew():
+    """Check to see if homebrew is present """
+    with _mute():
+        result = local('command -v brew')
+        if result.return_code == 0:
+            return True
+        else:
+            return False
 
 
 def install_windows():
