@@ -72,7 +72,7 @@ def install_mac():
     print
     if check_for_homebrew():
         print _header("Installing the Zabbix agent")
-        # local('brew install zabbix --without-server-proxy')
+        local('brew install zabbix --without-server-proxy')
     else:
         print _header('Homebrew is not installed. It is required. See README. Aborting.')
         exit()
